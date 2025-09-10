@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
 /* test1.c */
 
 #define SIZE (32*1024)
@@ -21,7 +23,7 @@ int main(int argc, char **argv)
         printf("Fatal error: Can't allocate memory of %d x %d = %lu\n", SIZE, SIZE, (unsigned long)SIZE*SIZE);
         exit(-1);
     }
-    
+     
     for (iteration = 0; iteration < ITERATIONS; iteration++) 
     {
         printf("test1, iteration: %d\n", iteration);
@@ -31,6 +33,8 @@ int main(int argc, char **argv)
             {
                 start->x[i][j] = 0;
             }
+       
         }
     }
+    //sleep(5);  
 }

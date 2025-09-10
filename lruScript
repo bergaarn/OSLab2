@@ -1,0 +1,9 @@
+#!/bin/bash
+./lru 1 128 mp3d.mem; ./lru 1 256 mp3d.mem; ./lru 1 512 mp3d.mem; ./lru 1 1024 mp3d.mem;
+./lru 2 128 mp3d.mem; ./lru 2 256 mp3d.mem; ./lru 2 512 mp3d.mem; ./lru 2 1024 mp3d.mem;
+./lru 4 128 mp3d.mem; ./lru 4 256 mp3d.mem; ./lru 4 512 mp3d.mem; ./lru 4 1024 mp3d.mem;
+./lru 8 128 mp3d.mem; ./lru 8 256 mp3d.mem; ./lru 8 512 mp3d.mem; ./lru 8 1024 mp3d.mem;
+./lru 16 128 mp3d.mem; ./lru 16 256 mp3d.mem; ./lru 16 512 mp3d.mem; ./lru 16 1024 mp3d.mem;
+./lru 32 128 mp3d.mem; ./lru 32 256 mp3d.mem; ./lru 32 512 mp3d.mem; ./lru 32 1024 mp3d.mem;
+./lru 64 128 mp3d.mem; ./lru 64 256 mp3d.mem; ./lru 64 512 mp3d.mem; ./lru 64 1024 mp3d.mem;
+./lru 128 128 mp3d.mem; ./lru 128 256 mp3d.mem; ./lru 128 512 mp3d.mem; ./lru 128 1024 mp3d.mem;

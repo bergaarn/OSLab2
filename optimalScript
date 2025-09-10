@@ -1,0 +1,9 @@
+#!/bin/bash
+./optimal 1 128 mp3d.mem; ./optimal 1 256 mp3d.mem; ./optimal 1 512 mp3d.mem; ./optimal 1 1024 mp3d.mem; 
+./optimal 2 128 mp3d.mem; ./optimal 2 256 mp3d.mem; ./optimal 2 512 mp3d.mem; ./optimal 2 1024 mp3d.mem;
+./optimal 4 128 mp3d.mem; ./optimal 4 256 mp3d.mem; ./optimal 4 512 mp3d.mem; ./optimal 4 1024 mp3d.mem;
+./optimal 8 128 mp3d.mem; ./optimal 8 256 mp3d.mem; ./optimal 8 512 mp3d.mem; ./optimal 8 1024 mp3d.mem;
+./optimal 16 128 mp3d.mem; ./optimal 16 256 mp3d.mem; ./optimal 16 512 mp3d.mem; ./optimal 16 1024 mp3d.mem;
+./optimal 32 128 mp3d.mem; ./optimal 32 256 mp3d.mem; ./optimal 32 512 mp3d.mem; ./optimal 32 1024 mp3d.mem;
+./optimal 64 128 mp3d.mem; ./optimal 64 256 mp3d.mem; ./optimal 64 512 mp3d.mem; ./optimal 64 1024 mp3d.mem;
+./optimal 128 128 mp3d.mem; ./optimal 128 256 mp3d.mem; ./optimal 128 512 mp3d.mem; ./optimal 128 1024 mp3d.mem;
