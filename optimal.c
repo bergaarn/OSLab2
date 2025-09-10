@@ -29,6 +29,8 @@ int main (int argc, char** argv)
 
     // Allocate dynamic array based on amount of physical pages from program call
     int* pageArray = malloc(physicalPages * sizeof(int));
+
+    // Allocate 100 000 slots for the entire memory trace
     unsigned int* entireMemoryTrace = malloc(totalMemReferences * sizeof(unsigned int));
 
     // Initialize physical page memory array
@@ -43,7 +45,7 @@ int main (int argc, char** argv)
         entireMemoryTrace[i] = -1;    // -1 (default value, before memory trace has been read)
     }
 
-    // Ensure there is 10000 memory references read from file
+    // Ensure there is 100 000 memory references read from file
     unsigned int verifyMemoryTrace = 0;
 
     // Load Adresses
@@ -62,6 +64,7 @@ int main (int argc, char** argv)
         }
     }
 
+    // If read isnt accurate, send error, free dynamic memory and close program
     if (!(verifyMemoryTrace == totalMemReferences))
     {
         printf("Verification unsuccesful when reading from file.\n");
@@ -71,19 +74,20 @@ int main (int argc, char** argv)
         return(1);
     }
 
-    // Initialize FIFO methodology variables, uints to handle large positive integers while saving memory
-    unsigned int memAddress = 0;
+    // Initialize pageFault and pageNumber variables
     unsigned int pageFaults = 0;
     unsigned int pageNumber = 0;
 
+    // Loop through dynamically allocated memory trace from file
     for (int addrIndex = 0; addrIndex < totalMemReferences; addrIndex++)
     {   
         // Calculate page number from memory trace index
         pageNumber = entireMemoryTrace[addrIndex] / pageSize;
 
+        // page fault flag
         bool pageFaultOccurred = true;
     
-        // Check if page is already in memory, if so set pageFault to false and save index
+        // Check if page is already in memory, if so set pageFault to false
         for (int i = 0; i < physicalPages; i++)
         {
             if (pageArray[i] == pageNumber)
@@ -93,20 +97,27 @@ int main (int argc, char** argv)
             }
         }
 
-        if (pageFaultOccurred) // If page is found, do nothing 
+        // If no page fault occured, do nothing 
+        if (pageFaultOccurred) 
         {
             // If page was not found in memory 
             pageFaults++;
             
+            // Initialize to -1 in case no future reference is found in memory trace
             int pageToEvict = -1;
+            // Initialize to -1 for future comparisons
             int furthestAwayPage = -1;
 
-            // Find the least recently used page
+            // Check when/if the physical pages are referenced in the future in the memory trace
             for (int i = 0; i < physicalPages; i++)
             {
-                int pageUsedAt = -1; // If it stays -1, it will never be referenced again and a great candidate for eviction
+                // If it stays -1, it will never be referenced again and a great candidate for eviction
+                int pageUsedAt = -1; 
+
+                // Start looking at the current address index + 1 for future references
                 for (int j = addrIndex + 1; j < totalMemReferences; j++)
                 {
+                    // If the physical page is referenced in the future, note index as pageUsedAt and break
                     if (pageArray[i] == entireMemoryTrace[j] / pageSize)
                     {
                         pageUsedAt = j;
@@ -114,12 +125,14 @@ int main (int argc, char** argv)
                     }          
                 }        
 
+                // If no future references was found, set to evict page at index i
                 if (pageUsedAt == -1)
                 {
                     pageToEvict = i; // Page never used again, break and evict;
                     break;
                 }
-
+                
+                // At this point, all pages are referenced in the future so keep track of the furthest reference
                 if (pageUsedAt > furthestAwayPage)
                 {
                     furthestAwayPage = pageUsedAt; 

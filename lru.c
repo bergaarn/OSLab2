@@ -35,7 +35,7 @@ int main (int argc, char** argv)
         lruArray[i] = -1;    // -1 (default value, before a recently used value has been set)
     }
 
-    // Initialize FIFO methodology variables, uints to handle large positive integers while saving memory
+    // Initialize LRU methodology variables, uints to handle large positive integers while saving memory
     unsigned int memAddress = 0;
     unsigned int totalMemReferences = 0;
     unsigned int pageFaults = 0;
