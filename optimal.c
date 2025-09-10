@@ -97,7 +97,7 @@ int main (int argc, char** argv)
             }
         }
 
-        // If no page fault occured, do nothing 
+        // If no page fault occured, do nothing otherwise proceed inside if statement
         if (pageFaultOccurred) 
         {
             // If page was not found in memory 
